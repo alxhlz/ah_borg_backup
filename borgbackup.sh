@@ -32,6 +32,14 @@ echo "##### Hostname: $(hostname) #####"
 echo "##### Backup gestartet $(date) #####"
 
 ##
+## mysql dump
+##
+
+if [[ $SQLDUMP = true ]]; then
+    mysqldump --all-databases > $SQLDUMPFILE
+fi
+
+##
 ## BORG BACKUP
 ##
 
@@ -70,7 +78,7 @@ echo "###### Backup beendet: $(date) ######"
 ## https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api
 ##
 
-if [[ $MGENABLE = 1 ]]; then
+if [[ $MGENABLE = true ]]; then
     curl -s --user $MGAPI \
         https://api.mailgun.net/v3/$MGDOMAIN/messages \
         -F from="AH:Backup <$MGMAIL>" \
@@ -84,5 +92,11 @@ fi
 ##
 
 echo "" >> /var/log/borg.log
-cat "$LOG" >> /var/log/borg.log
-rm "$LOG"
+cat $LOG >> /var/log/borg.log
+
+##
+## cleaning up
+##
+
+rm $SQLDUMPFILE
+rm $LOG
