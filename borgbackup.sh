@@ -98,5 +98,8 @@ cat $LOG >> /var/log/borg.log
 ## cleaning up
 ##
 
-rm $SQLDUMPFILE
+if [[ $SQLDUMP = true ]]; then
+  rm $SQLDUMPFILE
+fi
+
 rm $LOG
