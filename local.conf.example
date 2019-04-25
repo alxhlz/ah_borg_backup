@@ -22,7 +22,7 @@ MGRECIPIENT="" # mailgun mail recipient
 # The mysqldump will be deleted when the backup is completed.
 # You could restore the file with borg to restore the data.
 SQLDUMP=false # enable (true) or disable (false) mysql dump
-SQLDUMPFILE="/var/latestdump.sql"
+SQLDUMPFILE="/var/latestdump.sql.gz"
 
 export BORG_REPO="ssh://${BACKUP_USER}@${BACKUP_USER}.your-backup.de:23/./${REPOSITORY_DIR}"
 export BORG_RELOCATED_REPO_ACCESS_IS_OK=yes

@@ -36,7 +36,7 @@ echo "##### Backup gestartet $(date) #####"
 ##
 
 if [[ $SQLDUMP = true ]]; then
-    mysqldump --all-databases > $SQLDUMPFILE
+    mysqldump --all-databases | gzip > $SQLDUMPFILE 
 fi
 
 ##
